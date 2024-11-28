@@ -69,7 +69,7 @@ adapter_weights = load_file(adapter_weights_path)     # Load safetensors weights
 # Load weights into the model
 model.load_state_dict(adapter_weights, strict=False)
 model.eval()
-
+output = ""
 # Initial story prompt by the model
 print("STORY START: Once upon a time\n")
 
@@ -81,7 +81,8 @@ while True:
     if user_input.strip().upper() == "END":
         print("Storytelling session ended.")
         break
-
+    ## add context
+    user_input = output + " " + user_input
     # Generate model's response based solely on the user's input
     with torch.no_grad():
         inputs = tokenizer(user_input, return_tensors="pt")
@@ -110,6 +111,6 @@ while True:
     words = first_sentence.split()
     if len(words) > 20:
         first_sentence = " ".join(words[:20]) + "..."
-
+    output = first_sentence
     # Print the model's continuation
     print(f"AI: {first_sentence}\n")

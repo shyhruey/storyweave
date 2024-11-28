@@ -31,12 +31,15 @@ adapter_weights_path = './adapter_model.safetensors'  # Ensure this path is corr
 adapter_weights = load_file(adapter_weights_path)
 model.load_state_dict(adapter_weights, strict=False)
 model.eval()
+output = ""
+
 
 @app.route('/generate', methods=['POST'])
 def generate_response():
+    print("output: ", output)
     data = request.json
     user_input = data.get("input", "")
-    
+    user_input = output + " " + user_input
     # Generate response from the model
     with torch.no_grad():
         inputs = tokenizer(user_input, return_tensors="pt")
@@ -63,7 +66,7 @@ def generate_response():
     words = first_sentence.split()
     if len(words) > 20:
         first_sentence = " ".join(words[:20]) + "..."
-    
+    output = first_sentence
     return jsonify({"response": first_sentence})
 
 if __name__ == '__main__':
