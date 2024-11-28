@@ -10,6 +10,7 @@ StoryWeave is a project developed for the CS425 course, aimed at generating cont
     - **Model 1:** Trained on Context Short Stories dataset.
     - **Model 2:** Trained on Context Short Stories dataset, augmented with Writing Prompts.
     - **Model 3:** Trained on Context Short Stories dataset, augmented with ROCStories.
+    - **metrics.py:** A Python script that provides quantitative evaluation metrics for the performance of all three models on the test dataset.
 
 2. **Proof of Concept:**
     - **Frontend:**
@@ -37,6 +38,9 @@ StoryWeave is a project developed for the CS425 course, aimed at generating cont
             python app.py
             ```
 
-3. **metrics.py:** A Python script that provides quantitative evaluation metrics for the performance of all three models on the test dataset.
-
-4. **final_dataset.csv:** A cleaned and combined dataset consisting of Context Short Stories and ROCStories, used to train and evaluate the models.
+3. **Data Preprocessing:**
+    - **wp_preprocessing.py:** Preprocessing of the Writing Prompts dataset for use in
+    training model 2
+    - **final_dataset_preprocessing.py:** Preprocessing of the ROCStories dataset for use in
+    training model 3
+    - **final_dataset.csv:** A cleaned and combined dataset consisting of Context Short Stories and ROCStories, used to train and evaluate the models.
